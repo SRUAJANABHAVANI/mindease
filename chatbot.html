@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Help - MindEase</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #eef6f9;
+    }
+    .banner {
+      background: url('https://images.unsplash.com/photo-1532074205216-d0e1f4b87368') center/cover no-repeat;
+      height: 300px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .banner h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .ai-box {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    textarea {
+      resize: none;
+    }
+    .suggestion-item {
+      background: #f8f9fa;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 5px 0;
+    }
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question h5 {
+      margin-bottom: 0.5rem;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .option {
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .option:hover {
+      background-color: #f0f7ff;
+      border-color: #4a90e2;
+    }
+    .option.selected {
+      background-color: #4a90e2;
+      color: white;
+      border-color: #4a90e2;
+    }
+    .resources-box {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .resource-link {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      background: white;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+    .resource-link:hover {
+      background: #e9ecef;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">MindEase</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="counseling.html">Counseling</a></li>
+          <li class="nav-item"><a class="nav-link" href="moodtracker.html">Mood Tracker</a></li>
+          <li class="nav-item"><a class="nav-link active" href="chatbot.html">AI Help</a></li>
+          <li class="nav-item"><a class="nav-link" href="journal.html">Journal</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1>Mental Health Assessment</h1>
+  </div>
+
+  <!-- Assessment Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="ai-box">
+        <h4 class="fw-semibold mb-4">How have you been feeling lately?</h4>
+        <p class="mb-4">Please answer these questions to help us understand your current mental state.</p>
+        
+        <div id="assessment-form">
+          <div class="question">
+            <h5>1. How often do you feel overwhelmed or stressed?</h5>
+            <div class="options">
+              <div class="option" data-value="1">Rarely or never</div>
+              <div class="option" data-value="2">Sometimes</div>
+              <div class="option" data-value="3">Often</div>
+              <div class="option" data-value="4">Almost always</div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h5>2. How is your sleep quality?</h5>
+            <div class="options">
+              <div class="option" data-value="1">Very good</div>
+              <div class="option" data-value="2">Good</div>
+              <div class="option" data-value="3">Poor</div>
+              <div class="option" data-value="4">Very poor</div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h5>3. Do you have difficulty concentrating?</h5>
+            <div class="options">
+              <div class="option" data-value="1">Rarely or never</div>
+              <div class="option" data-value="2">Sometimes</div>
+              <div class="option" data-value="3">Often</div>
+              <div class="option" data-value="4">Almost always</div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h5>4. How would you rate your overall mood?</h5>
+            <div class="options">
+              <div class="option" data-value="1">Very good</div>
+              <div class="option" data-value="2">Good</div>
+              <div class="option" data-value="3">Poor</div>
+              <div class="option" data-value="4">Very poor</div>
+            </div>
+          </div>
+          
+          <div class="question">
+            <h5>5. Do you feel supported by friends or family?</h5>
+            <div class="options">
+              <div class="option" data-value="1">Very supported</div>
+              <div class="option" data-value="2">Somewhat supported</div>
+              <div class="option" data-value="3">Not very supported</div>
+              <div class="option" data-value="4">Not supported at all</div>
+            </div>
+          </div>
+          
+          <button id="submit-assessment" class="btn btn-primary mt-4">Submit Assessment</button>
+        </div>
+        
+        <div id="assessment-results" style="display: none;">
+          <h4 class="fw-semibold mb-3">Assessment Results</h4>
+          <div id="result-message" class="mb-4"></div>
+          
+          <div id="ai-chat-section" style="display: none;">
+            <h5 class="fw-semibold mb-3">What's on your mind?</h5>
+            <textarea id="userMessage" class="form-control mb-3" rows="5" placeholder="Describe how you feel... (e.g., I'm feeling anxious about my exams)"></textarea>
+            <button id="getSupport" class="btn btn-primary">Get Support</button>
+            
+            <div class="loading" id="loading">
+              <div class="loading-spinner"></div>
+              <p class="mt-2">Getting AI support...</p>
+            </div>
+
+            <div class="mt-4" id="response-box" style="display: none;">
+              <h5 class="text-success">AI Response:</h5>
+              <p id="aiResponse"></p>
+              <h6 class="mt-3">Suggestions:</h6>
+              <div id="suggestions"></div>
+            </div>
+          </div>
+          
+          <div id="wellness-resources" style="display: none;">
+            <h5 class="fw-semibold mb-3">Wellness Resources</h5>
+            <p>Here are some resources to help maintain your mental well-being:</p>
+            
+            <div class="resources-box">
+              <h6>Meditation Videos</h6>
+              <a href="https://www.youtube.com/watch?v=inpok4MKVLM" target="_blank" class="resource-link">
+                <i class="fas fa-play-circle me-2"></i> 10-Minute Meditation for Beginners
+              </a>
+              <a href="https://www.youtube.com/watch?v=z6X5oEIg6Ak" target="_blank" class="resource-link">
+                <i class="fas fa-play-circle me-2"></i> Guided Breathing Exercise
+              </a>
+              <a href="https://www.youtube.com/watch?v=1ZYbU82GVz4" target="_blank" class="resource-link">
+                <i class="fas fa-play-circle me-2"></i> Mindfulness for Stress Relief
+              </a>
+              
+              <h6 class="mt-4">Articles</h6>
+              <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/stress/self-care/" target="_blank" class="resource-link">
+                <i class="fas fa-book-open me-2"></i> Self-Care for Stress Management
+              </a>
+              <a href="https://www.helpguide.org/articles/mental-health/improving-emotional-health.htm" target="_blank" class="resource-link">
+                <i class="fas fa-book-open me-2"></i> Improving Emotional Health
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-1">&copy; 2025 MindEase. All rights reserved.</p>
+      <small>AI-powered support to keep you grounded.</small>
+    </div>
+  </footer>
+
+  <script src="api.js"></script>
+  <script>
+    // Assessment functionality
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', function() {
+        // Remove selected class from siblings
+        this.parentElement.querySelectorAll('.option').forEach(sib => {
+          sib.classList.remove('selected');
+        });
+        // Add selected class to clicked option
+        this.classList.add('selected');
+      });
+    });
+    
+    document.getElementById('submit-assessment').addEventListener('click', function() {
+      // Check if all questions are answered
+      const questions = document.querySelectorAll('.question');
+      let allAnswered = true;
+      let totalScore = 0;
+      
+      questions.forEach(question => {
+        const selectedOption = question.querySelector('.option.selected');
+        if (!selectedOption) {
+          allAnswered = false;
+        } else {
+          totalScore += parseInt(selectedOption.dataset.value);
+        }
+      });
+      
+      if (!allAnswered) {
+        alert('Please answer all questions before submitting.');
+        return;
+      }
+      
+      // Show results
+      document.getElementById('assessment-form').style.display = 'none';
+      document.getElementById('assessment-results').style.display = 'block';
+      
+      // Calculate average score (1-4 scale)
+      const averageScore = totalScore / questions.length;
+      
+      // Determine result message
+      const resultMessage = document.getElementById('result-message');
+      if (averageScore <= 1.5) {
+        resultMessage.innerHTML = `
+          <div class="alert alert-success">
+            <h5>Your mental well-being appears to be good!</h5>
+            <p>You're showing signs of good mental health. Continue practicing self-care and maintaining healthy habits.</p>
+          </div>
+        `;
+        document.getElementById('wellness-resources').style.display = 'block';
+      } else if (averageScore <= 2.5) {
+        resultMessage.innerHTML = `
+          <div class="alert alert-warning">
+            <h5>You might be experiencing some stress</h5>
+            <p>While not severe, you're showing signs of mild stress or anxiety. Consider talking to someone or trying some relaxation techniques.</p>
+          </div>
+        `;
+        document.getElementById('ai-chat-section').style.display = 'block';
+        document.getElementById('wellness-resources').style.display = 'block';
+      } else {
+        resultMessage.innerHTML = `
+          <div class="alert alert-danger">
+            <h5>You might be experiencing significant stress</h5>
+            <p>Your responses indicate you're dealing with moderate to high levels of stress or anxiety. It's important to address these feelings.</p>
+          </div>
+        `;
+        document.getElementById('ai-chat-section').style.display = 'block';
+        document.getElementById('wellness-resources').style.display = 'block';
+      }
+    });
+    
+    // AI Support functionality
+    document.getElementById('getSupport').addEventListener('click', async function() {
+      const message = document.getElementById('userMessage').value;
+      if (!message.trim()) {
+        alert('Please enter your message first.');
+        return;
+      }
+
+      // Show loading
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('response-box').style.display = 'none';
+
+      try {
+        const response = await window.api.getAISupport(message);
+        if (response.success) {
+          document.getElementById('aiResponse').textContent = response.message;
+          
+          // Display suggestions
+          const suggestionsDiv = document.getElementById('suggestions');
+          suggestionsDiv.innerHTML = '';
+          response.suggestions.forEach(suggestion => {
+            const div = document.createElement('div');
+            div.className = 'suggestion-item';
+            div.textContent = suggestion;
+            suggestionsDiv.appendChild(div);
+          });
+
+          document.getElementById('response-box').style.display = 'block';
+        } else {
+          alert('Failed to get AI support. Please try again.');
+        }
+      } catch (error) {
+        alert('Error: ' + error.message);
+      } finally {
+        document.getElementById('loading').style.display = 'none';
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindEase - Student Mental Health Support</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      
+      body {
+          background-color: #f5faff;
+          color: #333;
+          line-height: 1.6;
+      }
+      
+      header {
+          background: linear-gradient(135deg, #4a90e2, #67c1f5);
+          color: white;
+          padding: 1rem;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      nav {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.5rem 5%;
+      }
+      
+      .logo {
+          font-size: 1.8rem;
+          font-weight: bold;
+      }
+      
+      .menu {
+          display: flex;
+          list-style: none;
+      }
+      
+      .menu li {
+          margin-left: 2rem;
+      }
+      
+      .menu a {
+          color: white;
+          text-decoration: none;
+          font-weight: 500;
+          transition: all 0.3s ease;
+      }
+      
+      .menu a:hover {
+          color: #f0f0f0;
+      }
+      
+      .auth-buttons a {
+          background-color: white;
+          color: #4a90e2;
+          padding: 0.5rem 1.5rem;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: 600;
+          margin-left: 1rem;
+          transition: all 0.3s ease;
+      }
+      
+      .auth-buttons a:hover {
+          background-color: #f0f0f0;
+          transform: translateY(-2px);
+      }
+      
+      .hero {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 8rem 1rem;
+          color: white;
+          min-height: 600px;
+          background: url('images/meditation.jpg') center/cover no-repeat;
+      }
+      
+      .hero-image {
+          display: none; /* Hide the old hero image */
+      }
+      
+      .hero-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+          z-index: -1;
+      }
+      
+      .hero-content {
+          background-color: rgba(0, 0, 0, 0.4);
+          padding: 2rem;
+          border-radius: 10px;
+          max-width: 700px;
+          backdrop-filter: blur(5px);
+      }
+      
+      .hero h1 {
+          font-size: 2.8rem;
+          margin-bottom: 1.5rem;
+          text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      }
+      
+      .hero p {
+          font-size: 1.2rem;
+          margin-bottom: 2rem;
+          text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      }
+      
+      .cta-button {
+          background-color: #b18cf0; /* Purple color to match outfit in image */
+          color: white;
+          padding: 0.8rem 2rem;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 1.1rem;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      }
+      
+      .cta-button:hover {
+          background-color: #9870e2;
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      }
+      
+      .features {
+          padding: 5rem 10%;
+          background-color: white;
+      }
+      
+      .section-heading {
+          text-align: center;
+          margin-bottom: 3rem;
+      }
+      
+      .section-heading h2 {
+          font-size: 2rem;
+          color: #4a90e2;
+          margin-bottom: 1rem;
+      }
+      
+      .section-heading p {
+          max-width: 700px;
+          margin: 0 auto;
+          color: #666;
+      }
+      
+      .feature-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+      }
+      
+      .feature-card {
+          background-color: #f5faff;
+          border-radius: 10px;
+          padding: 2rem;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+          transition: all 0.3s ease;
+          border-top: 4px solid #4a90e2;
+      }
+      
+      .feature-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      }
+      
+      .feature-icon {
+          font-size: 2rem;
+          color: #4a90e2;
+          margin-bottom: 1rem;
+      }
+      
+      .feature-card h3 {
+          font-size: 1.4rem;
+          margin-bottom: 1rem;
+          color: #444;
+      }
+      
+      .resources {
+          background-color: #e3f2fd;
+          padding: 5rem 10%;
+      }
+      
+      .resource-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+      }
+      
+      .resource-card {
+          background-color: white;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
+      
+      .resource-img {
+          height: 200px;
+          background-color: #f5faff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #4a90e2;
+          overflow: hidden;
+          position: relative;
+      }
+      
+      .resource-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+      }
+      
+      .resource-card:hover .resource-img img {
+          transform: scale(1.05);
+      }
+      
+      .resource-img-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+      }
+      
+      .resource-content {
+          padding: 1.5rem;
+      }
+      
+      .resource-content h3 {
+          color: #333;
+          margin-bottom: 0.5rem;
+      }
+      
+      .resource-content p {
+          color: #666;
+          margin-bottom: 1rem;
+          font-size: 0.95rem;
+          line-height: 1.5;
+      }
+      
+      .resource-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          margin-top: 1rem;
+      }
+      
+      .resource-link {
+          color: #4a90e2;
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-block;
+          padding: 0.3rem 0;
+          transition: all 0.3s ease;
+      }
+      
+      .resource-link:hover {
+          color: #357abd;
+          transform: translateX(5px);
+      }
+      
+      .testimonials {
+          padding: 5rem 10%;
+          background-color: white;
+      }
+      
+      .testimonial-slider {
+          max-width: 800px;
+          margin: 0 auto;
+          background-color: #f5faff;
+          border-radius: 10px;
+          padding: 2rem;
+          text-align: center;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+          border-left: 4px solid #b18cf0;
+      }
+      
+      .testimonial-text {
+          font-style: italic;
+          font-size: 1.1rem;
+          margin-bottom: 1.5rem;
+          color: #555;
+      }
+      
+      .testimonial-author {
+          font-weight: 600;
+          color: #4a90e2;
+      }
+      
+      .get-help {
+          padding: 5rem 10%;
+          background: linear-gradient(135deg, #4a90e2, #67c1f5);
+          color: white;
+          text-align: center;
+      }
+      
+      .help-options {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2rem;
+          margin-top: 3rem;
+      }
+      
+      .help-option {
+          background-color: white;
+          border-radius: 10px;
+          padding: 2rem;
+          width: 300px;
+          color: #333;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      
+      .help-option h3 {
+          color: #4a90e2;
+          margin-bottom: 1rem;
+      }
+      
+      .help-button {
+          display: inline-block;
+          background-color: #b18cf0;
+          color: white;
+          padding: 0.7rem 1.5rem;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: 600;
+          margin-top: 1rem;
+          transition: all 0.3s ease;
+      }
+      
+      .help-button:hover {
+          background-color: #9870e2;
+          transform: translateY(-2px);
+      }
+      
+      footer {
+          background-color: #2c3e50;
+          color: white;
+          padding: 3rem 10% 2rem;
+      }
+      
+      .footer-content {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 2rem;
+          margin-bottom: 2rem;
+      }
+      
+      .footer-column h3 {
+          margin-bottom: 1rem;
+          font-size: 1.2rem;
+      }
+      
+      .footer-links {
+          list-style: none;
+      }
+      
+      .footer-links li {
+          margin-bottom: 0.7rem;
+      }
+      
+      .footer-links a {
+          color: #4a90e2;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          font-weight: 500;
+          padding: 5px 0;
+          display: inline-block;
+      }
+      
+      .footer-links a:hover {
+          color: #b18cf0;
+          transform: translateX(5px);
+          text-decoration: none;
+      }
+      
+      .footer-section h3 {
+          color: #fff;
+          margin-bottom: 1.5rem;
+          font-size: 1.3rem;
+          position: relative;
+          padding-bottom: 0.5rem;
+      }
+      
+      .footer-section h3::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 50px;
+          height: 2px;
+          background: #4a90e2;
+      }
+      
+      .copyright {
+          text-align: center;
+          padding-top: 2rem;
+          border-top: 1px solid #444;
+          color: #aaa;
+          font-size: 0.9rem;
+      }
+      
+      @media (max-width: 768px) {
+          .menu {
+              display: none;
+          }
+          
+          .hero h1 {
+              font-size: 2rem;
+          }
+          
+          .hero p {
+              font-size: 1rem;
+          }
+      }
+      
+      /* Modal styles */
+      .modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1000;
+      }
+      
+      .modal-content {
+          background-color: white;
+          margin: 15% auto;
+          padding: 2rem;
+          border-radius: 10px;
+          max-width: 400px;
+          position: relative;
+      }
+      
+      .close {
+          position: absolute;
+          right: 1rem;
+          top: 1rem;
+          font-size: 1.5rem;
+          cursor: pointer;
+          color: #666;
+      }
+      
+      .close:hover {
+          color: #333;
+      }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">MindEase</div>
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="journal.html">Journal</a></li>
+        <li><a href="counseling.html">Counseling</a></li>
+        <li><a href="moodtracker.html">Mood Tracker</a></li>
+        <li><a href="chatbot.html">AI Help</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="auth-buttons" id="authButtons">
+        <a href="#" id="loginBtn">Login</a>
+        <a href="#" id="registerBtn">Register</a>
+      </div>
+      <div class="user-profile" id="userProfile" style="display: none;">
+        <span id="userName">User</span>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+      <p>Don't have an account? <a href="#" id="switchToRegister">Register</a></p>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Register</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="registerUsername">Username</label>
+          <input type="text" id="registerUsername" required>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="registerRole">Role</label>
+          <select id="registerRole">
+            <option value="student">Student</option>
+            <option value="counselor">Counselor</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary">Register</button>
+      </form>
+      <p>Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src=""C:\Users\Admin\Desktop\MINDEASE\images\meditation.jpg" alt="MindEase Hero" class="hero-image">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Your Mental Health Matters</h1>
+      <p>MindEase provides accessible and confidential support to help you manage stress, anxiety, and other challenges. Take control of your mental well-being today.</p>
+      <a href="#" class="cta-button" id="getStartedBtn">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="section-heading">
+      <h2>How MindEase Can Help You</h2>
+      <p>Our comprehensive platform offers various tools and resources to support your mental health journey.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-book"></i></div>
+        <h3>Journaling</h3>
+        <p>Express your thoughts and feelings in a private journal. Track your mood and identify patterns over time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-comments"></i></div>
+        <h3>Online Counseling</h3>
+        <p>Connect with licensed counselors for confidential support. Schedule sessions that fit your schedule.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Mood Tracking</h3>
+        <p>Monitor your emotional well-being with our intuitive mood tracking tools. Visualize your progress over time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+        <h3>AI-Powered Support</h3>
+        <p>Receive personalized recommendations and insights based on your journal entries and mood patterns.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="resources">
+    <div class="section-heading">
+      <h2>Mental Health Resources</h2>
+      <p>Access a wealth of information and tools to support your mental health journey.</p>
+    </div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <div class="resource-img">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773" alt="Stress Management">
+          <div class="resource-img-overlay"></div>
+        </div>
+        <div class="resource-content">
+          <h3>Stress Management</h3>
+          <p>Learn effective techniques to manage stress and anxiety in your daily life.</p>
+          <div class="resource-links">
+            <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/stress/" class="resource-link" target="_blank">Understanding Stress</a>
+            <a href="https://www.youtube.com/watch?v=1nZEdqcGVzo" class="resource-link" target="_blank">5-Minute Stress Relief</a>
+          </div>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-img">
+          <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5" alt="Mindfulness & Meditation">
+          <div class="resource-img-overlay"></div>
+        </div>
+        <div class="resource-content">
+          <h3>Mindfulness & Meditation</h3>
+          <p>Practice mindfulness to stay present and reduce overwhelming thoughts.</p>
+          <div class="resource-links">
+            <a href="https://www.headspace.com/meditation/meditation-for-beginners" class="resource-link" target="_blank">Meditation Guide</a>
+            <a href="https://www.youtube.com/watch?v=inpok4MKVLM" class="resource-link" target="_blank">10-Minute Meditation</a>
+          </div>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-img">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac" alt="Peer Support">
+          <div class="resource-img-overlay"></div>
+        </div>
+        <div class="resource-content">
+          <h3>Peer Support</h3>
+          <p>Connect with others who understand what you're going through.</p>
+          <div class="resource-links">
+            <a href="https://www.7cups.com/" class="resource-link" target="_blank">Online Support Community</a>
+            <a href="https://www.youtube.com/watch?v=Z7dLU6fk9QY" class="resource-link" target="_blank">Finding Support</a>
+          </div>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-img">
+          <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af" alt="Sleep & Wellness">
+          <div class="resource-img-overlay"></div>
+        </div>
+        <div class="resource-content">
+          <h3>Sleep & Wellness</h3>
+          <p>Improve your sleep quality and overall well-being.</p>
+          <div class="resource-links">
+            <a href="https://www.sleepfoundation.org/mental-health" class="resource-link" target="_blank">Sleep & Mental Health</a>
+            <a href="https://www.youtube.com/watch?v=1ZYbU82GVz4" class="resource-link" target="_blank">Sleep Meditation</a>
+          </div>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-img">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b" alt="Physical Health">
+          <div class="resource-img-overlay"></div>
+        </div>
+        <div class="resource-content">
+          <h3>Physical Health</h3>
+          <p>Understand the connection between physical and mental health.</p>
+          <div class="resource-links">
+            <a href="https://www.mentalhealth.org.uk/explore-mental-health/a-z-topics/physical-activity-and-mental-health" class="resource-link" target="_blank">Exercise & Mental Health</a>
+            <a href="https://www.youtube.com/watch?v=l4eNvJ64VX8" class="resource-link" target="_blank">Yoga for Mental Health</a>
+          </div>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-img">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" alt="Academic Success">
+          <div class="resource-img-overlay"></div>
+        </div>
+        <div class="resource-content">
+          <h3>Academic Success</h3>
+          <p>Tips for managing academic stress and maintaining work-life balance.</p>
+          <div class="resource-links">
+            <a href="https://www.psychologytoday.com/us/blog/mental-health-across-lifespan/202009/managing-academic-stress" class="resource-link" target="_blank">Managing Academic Stress</a>
+            <a href="https://www.youtube.com/watch?v=1q44hTg0Y1g" class="resource-link" target="_blank">Study Tips & Mental Health</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>MindEase</h3>
+        <p>Supporting student mental health and well-being.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="resources.html"><i class="fas fa-book"></i> Resources</a></li>
+          <li><a href="journal.html"><i class="fas fa-pen"></i> Journal</a></li>
+          <li><a href="counseling.html"><i class="fas fa-comments"></i> Counseling</a></li>
+          <li><a href="moodtracker.html"><i class="fas fa-chart-line"></i> Mood Tracker</a></li>
+          <li><a href="chatbot.html"><i class="fas fa-robot"></i> AI Help</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>Email: support@mindease.com</p>
+        <p>Phone: (123) 456-7890</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 MindEase. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Include our API service -->
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
